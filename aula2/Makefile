@@ -11,9 +11,12 @@ BIN = bin/
 
 # Targets
 .PHONY: all
-all: $(BIN)/server $(BIN)/client
+all: $(BIN)/server $(BIN)/serverPT $(BIN)/client
 
 $(BIN)/server: server.c
+	$(CC) $(CFLAGS) -o $@ $^ -I $(INCLUDE) -L $(LINKER)
+
+$(BIN)/serverPT: serverPT.c
 	$(CC) $(CFLAGS) -o $@ $^ -I $(INCLUDE) -L $(LINKER)
 
 $(BIN)/client: client.c
@@ -22,6 +25,10 @@ $(BIN)/client: client.c
 .PHONY: run_server
 run_server: $(BIN)/server
 	./$(BIN)/server
+
+run_serverPT: $(BIN)/serverPT
+	./$(BIN)/serverPT
+
 
 .PHONY: run_client
 run_client: $(BIN)/client
